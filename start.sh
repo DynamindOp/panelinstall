@@ -67,34 +67,33 @@ while true; do
   read -rp "Enter your choice (i-viii): " choice
 
   case $choice in
-    i|i\)) 
-      run_command bash <(curl -s https://ptero.jishnu.fun/)
+    i ) 
+      run_command bash <(curl -s ptero.jishnu.fun)
       ;;
-    ii|ii\)) 
-      run_command bash <( curl -s https://gist.githubusercontent.com/fahmibinamin/e64a9fa40b12092103731b92eb362424/raw/866c53cbb7f963b5ccd49be7bcc1359665f8fc3b/gistfile1.txt)
+    ii ) 
+      run_command bash <(curl -s https://gist.githubusercontent.com/fahmibinamin/e64a9fa40b12092103731b92eb362424/raw/866c53cbb7f963b5ccd49be7bcc1359665f8fc3b/gistfile1.txt)
       ;;
-    iii|iii\)) 
-      run_command python3 <( curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24)
+    iii ) 
+      run_command python3 <(curl -s https://raw.githubusercontent.com/JishnuTheGamer/24-7/refs/heads/main/24)
       ;;
-    iv|iv\)) 
+    iv ) 
       run_command curl -fsSL https://tailscale.com/install.sh | sh
       ;;
-    v|v\)) 
-      run_command bash <( curl -s https://codes.jishnu.fun)
+    v ) 
+      run_command bash <(curl -s https://codes.jishnu.fun)
       ;;
-    vi|vi\)) 
+    vi ) 
       run_command curl -sSf https://sshx.io/get | sh
       ;;
-    vii|vii\)) 
+    vii ) 
       setup_firewall
       ;;
-    viii|viii\)) 
-      echo "Exiting panel..."; exit 0 
+    viii ) 
+      echo "Exiting panel..."; exit 0
       ;;
-    *) 
-      echo -e "\e[35mInvalid option! Please type i), ii), iii), iv), v), vi), vii), or viii)\e[0m"  # Purple invalid error
+    * ) 
+      echo -e "\e[35mInvalid option! Please type i, ii, iii, iv, v, vi, vii, or viii\e[0m"
       ;;
   esac
 
-  read -rp "Press Enter to return to menu..."  # Always wait before showing menu again
 done
