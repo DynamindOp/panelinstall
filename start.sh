@@ -2,21 +2,22 @@
 clear
 
 # 🟢 Green Header Lines
-header
+header=(
 "-----------------------------------------------"
 "-   DYNAMIX NODES | MULTI PANEL INSTALLER     -"
 "-----------------------------------------------"
 )
-# 🟠 Panel Installisations:
+
+# 🟠 Panel Installations:
 menu=(
-"i. Pterodactyl Multi Installer - Jishnu"
-"ii. Idx 24/7 - Gamer_L"
-"iii. 24/7 Panel Code - Jishnu"
-"iv. Tailscale Install - Tailscale"
-"v. One Cmd Panel - Jishnu"
-"vi. sshx.io Setup - DynamindOP_"
-"vii. FireWall Protection - DynamindOP_
-"viii. Exit - DynamindOP_"
+"i) Pterodactyl Multi Installer - Jishnu"
+"ii) Idx 24/7 - Gamer_L"
+"iii) 24/7 Panel Code - Jishnu"
+"iv) Tailscale Install - Tailscale"
+"v) One Cmd Panel - Jishnu"
+"vi) sshx.io Setup - DynamindOP_"
+"vii) Firewall Protection - DynamindOP_"
+"viii) Exit - DynamindOP_"
 )
 
 # 🔹 Typewriter animation function
@@ -30,28 +31,34 @@ typewriter() {
   echo ""
 }
 
-# 🔹 Function to show UI
+# 🔹 Function to show UI with typewriter effect
 show_ui() {
   clear
-  # Print header in blue
+  # Print header in green
   for line in "${header[@]}"; do
-    echo -e "\e[38;5;27;1m$line\e[0m"  # 27 = blue, 1 = bold
+    echo -ne "\e[38;5;46;1m"   # 46 = green, 1 = bold
+    typewriter "$line" 0.005
+    echo -ne "\e[0m"
   done
   echo ""
 
   # Print menu in orange
   for option in "${menu[@]}"; do
-    echo -e "\e[38;5;208m$option\e[0m"  # 208 = orange
+    echo -ne "\e[38;5;208m"
+    typewriter "$option" 0.005
+    echo -ne "\e[0m"
   done
   echo ""
 }
 
 # 🔹 Function to safely run commands
 run_command() {
-  "$@" || echo -e "\e[31mAn Unexpected Error Occurred Because Of The VPS\e[0m"
+  "$@" || {
+    echo -e "\e[35mAn Unexpected Error Occurred Because Of The VPS\e[0m"  # Purple error
+  }
 }
 
-# 🔹 Function to setup firewall
+# 🔹 Function to setup firewall (only ports 19100 & 19200)
 setup_firewall() {
   echo -e "\e[34mSetting up firewall...\e[0m"
 
@@ -59,16 +66,16 @@ setup_firewall() {
   sudo ufw allow 22/tcp      # SSH
   sudo ufw allow 80/tcp      # HTTP
   sudo ufw allow 443/tcp     # HTTPS
-  sudo ufw allow 8080/tcp    # Wings port, Change If Nedded
+  sudo ufw allow 8080/tcp    # Wings port, change if you need
 
-  # Game Aloocation Ports, Chnage If Needed
-  sudo ufw allow 19100:19200/tcp
+  # Only allow 19100 and 19200
+  sudo ufw allow 19100/tcp
+  sudo ufw allow 19200/tcp
 
   sudo ufw logging on
   sudo ufw status verbose
 
   echo -e "\e[32mFirewall setup complete!\e[0m"
-  
 }
 
 # 🔹 Main loop
