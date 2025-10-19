@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-# 🟢 Green Header Lines
+# 🔷 Blue Header Lines
 header=(
 "-----------------------------------------------"
 "-   DYNAMIX NODES | MULTI PANEL INSTALLER     -"
@@ -20,42 +20,25 @@ menu=(
 "viii) Exit - DynamindOP_"
 )
 
-# 🔹 Typewriter animation function
-typewriter() {
-  local text="$1"
-  local delay=${2:-0.03}  # default 0.03s per character
-  for ((i=0; i<${#text}; i++)); do
-    echo -n "${text:$i:1}"
-    sleep "$delay"
-  done
-  echo ""
-}
-
-# 🔹 Function to show UI with typewriter effect
+# 🔹 Function to show UI
 show_ui() {
   clear
-  # Print header in green
+  # Print header in blue
   for line in "${header[@]}"; do
-    echo -ne "\e[38;5;46;1m"   # 46 = green, 1 = bold
-    typewriter "$line" 0.005
-    echo -ne "\e[0m"
+    echo -e "\e[38;5;27;1m$line\e[0m"  # 27 = blue, 1 = bold
   done
   echo ""
 
   # Print menu in orange
   for option in "${menu[@]}"; do
-    echo -ne "\e[38;5;208m"
-    typewriter "$option" 0.005
-    echo -ne "\e[0m"
+    echo -e "\e[38;5;208m$option\e[0m"  # 208 = orange
   done
   echo ""
 }
 
 # 🔹 Function to safely run commands
 run_command() {
-  "$@" || {
-    echo -e "\e[35mAn Unexpected Error Occurred Because Of The VPS\e[0m"  # Purple error
-  }
+  "$@" || echo -e "\e[35mAn Unexpected Error Occurred Because Of The VPS\e[0m"  # Purple error
 }
 
 # 🔹 Function to setup firewall (only ports 19100 & 19200)
@@ -66,7 +49,7 @@ setup_firewall() {
   sudo ufw allow 22/tcp      # SSH
   sudo ufw allow 80/tcp      # HTTP
   sudo ufw allow 443/tcp     # HTTPS
-  sudo ufw allow 8080/tcp    # Wings port, change if you need
+  sudo ufw allow 8080/tcp    # Wings port (replace if needed)
 
   # Only allow 19100 and 19200
   sudo ufw allow 19100/tcp
@@ -113,5 +96,5 @@ while true; do
       ;;
   esac
 
-  read -rp "Press Enter to return to menu..." 
+  read -rp "Press Enter to return to menu..."  # Always wait before showing menu again
 done
