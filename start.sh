@@ -68,7 +68,7 @@ while true; do
 
   case $choice in
     i|i\)) 
-      run_command bash <( curl -s ptero.jishnu.fun)
+      run_command bash <(curl -s https://ptero.jishnu.fun/)
       ;;
     ii|ii\)) 
       run_command bash <( curl -s https://gist.githubusercontent.com/fahmibinamin/e64a9fa40b12092103731b92eb362424/raw/866c53cbb7f963b5ccd49be7bcc1359665f8fc3b/gistfile1.txt)
